@@ -21,7 +21,7 @@ app = Flask(__name__)
 @app.route("/",methods=['GET','POST'])
 def getJSON():
     content = request.get_json(silent=True)
-    if hid in data.keys():
+    if content["hid"] in data.keys():
         return json.dumps(data[content["hid"]])
     else:
         return json.dumps({})
