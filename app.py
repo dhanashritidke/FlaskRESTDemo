@@ -21,11 +21,14 @@ app = Flask(__name__)
 @app.route("/",methods=['GET','POST'])
 def getJSON():
     content = request.get_json(silent=True)
-    return json.dumps(data[content["hid"]])
+    if hid in data.keys():
+        return json.dumps(data[content["hid"]])
+    else:
+        return json.dumps({})
 
 @app.route("/hid/<hid>",methods=['GET','POST'])
 def getJSONwithHid(hid):
     if hid in data.keys():
         return json.dumps(data[hid])
     else:
-        return {}
+        return json.dumps({})
